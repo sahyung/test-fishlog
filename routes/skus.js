@@ -15,6 +15,10 @@ const fields = [
     "product__name",
 ];
 
+function filterByValue(array, string, key) {
+    return array.filter(o => o[key].toLowerCase().includes(string.toLowerCase()));
+}
+
 /* GET sku listing, sort descending by param, default product__name. */
 router.get('/sort', function (req, res, next) {
     let orderBy = 'product__name';
@@ -25,8 +29,20 @@ router.get('/sort', function (req, res, next) {
     let sorted = _.sortBy(objSKU, orderBy).reverse();
     res.json(sorted);
 });
+
+/* GET sku listing, filter by param, default product__name. */
 router.get('/filter', function (req, res, next) {
-    res.send('respond with a resource sku');
+    let filterBy = 'product__name', search = '';
+    if (req.query.filterBy && fields.includes(filterBy)) {
+        filterBy = req.query.filterBy;
+        if (filterBy.toUpperCase() === 'SKU') filterBy = filterBy.toUpperCase()
+    }
+    if (req.query.search) {
+        search = req.query.search;
+    }
+
+    let filtered = filterByValue(objSKU, search, filterBy)
+    res.json(filtered);
 });
 
 module.exports = router;
