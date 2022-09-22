@@ -1,0 +1,16 @@
+version: "3"
+services:
+  dev:
+    build: .
+    command: npm start
+    # command: docker-entrypoint.sh
+    container_name: fishlog.test
+    environment:
+      - NODE_OPTIONS=--openssl-legacy-provider
+    image: node-boilerplate:local
+    ports:
+      - 3000:3000/tcp
+    tty: true
+    volumes:
+      - $PWD:/app
+    working_dir: /app
