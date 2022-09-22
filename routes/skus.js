@@ -19,7 +19,8 @@ function filterByValue(array, string, key) {
     return array.filter(o => o[key].toLowerCase().includes(string.toLowerCase()));
 }
 
-/* GET sku listing, sort descending by param, default product__name. */
+/* GET sku listing, sort descending by orderBy, default product__name. 
+*/
 router.get('/sort', function (req, res, next) {
     let orderBy = 'product__name';
     if (req.query.orderBy && fields.includes(orderBy)) {
@@ -30,7 +31,10 @@ router.get('/sort', function (req, res, next) {
     res.json(sorted);
 });
 
-/* GET sku listing, filter by param, default product__name. */
+/* GET sku listing,
+ * filter by filterBy, default product__name.
+ * search by search, default empty string
+*/
 router.get('/filter', function (req, res, next) {
     let filterBy = 'product__name', search = '';
     if (req.query.filterBy && fields.includes(filterBy)) {

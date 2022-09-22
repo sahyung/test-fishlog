@@ -15,3 +15,18 @@
 npm install
 npm start
 ```
+
+### Tasks done
+
+- Sort endpoint
+url : http://localhost:3000/sort
+method : GET
+param :
+  - `orderBy` string, optional, default `product__name`
+
+- Filter endpoint
+url : http://localhost:3000/filter
+method : GET
+param :
+  - `filterBy` string, optional, default `product__name`
+  - `search` string, optional, default `''`
